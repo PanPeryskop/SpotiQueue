@@ -10,9 +10,11 @@ SpotiQueue is a Python application that allows Spotify users to queue multiple p
 
 ## Installation
 
-1. Go to release section of this repository. Current is:
-2. Click on **SpotiQueue.exe**. Download will start automatically
-3. No additional files are needed, so you can start using it instantly after the download is complete.
+1. Go to release section of this repository. Current is: https://github.com/PanPeryskop/SpotiQueue/releases/tag/v1.0
+2. Click on **SpotiQueue.zip**. Download will start automatically
+3. Extract zip.
+4. Open folder and run SpotiQueue.exe
+5. Enjoy!
 
 ## Usage
 
