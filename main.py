@@ -154,35 +154,36 @@ def get_playlist_from_profile(playlist_url):
 def update_page():
     global images, playlist_frame
 
-    for widget in playlist_frame.winfo_children():
-        widget.destroy()
+    if playlist_frame.winfo_exists():
+        for widget in playlist_frame.winfo_children():
+            widget.destroy()
 
-    images = []
+        images = []
 
-    for playlist in pages[current_page]:
-        playlist_url = playlist['external_urls']['spotify']
-        image_url = playlist['images'][0]['url']
-        response = requests.get(image_url)
-        img_data = response.content
+        for playlist in pages[current_page]:
+            playlist_url = playlist['external_urls']['spotify']
+            image_url = playlist['images'][0]['url']
+            response = requests.get(image_url)
+            img_data = response.content
 
-        img = Image.open(BytesIO(img_data))
-        name = playlist['name'][:20]
+            img = Image.open(BytesIO(img_data))
+            name = playlist['name'][:20]
 
-        photo = CTkImage(img)
-        images.append(photo)
+            photo = CTkImage(img)
+            images.append(photo)
 
-        playlist_button = tk.CTkButton(playlist_frame, image=photo, text=name, anchor="w", command=lambda playlist_url=playlist_url: get_playlist_from_profile(playlist_url))
-        playlist_button.pack(fill="x")
+            playlist_button = tk.CTkButton(playlist_frame, image=photo, text=name, anchor="w", command=lambda playlist_url=playlist_url: get_playlist_from_profile(playlist_url))
+            playlist_button.pack(fill="x")
 
-    if current_page > 0:
-        prev_button["state"] = "normal"
-    else:
-        prev_button["state"] = "disabled"
-    if current_page < len(pages) - 1:
-        next_button["state"] = "normal"
-    else:
-        next_button["state"] = "disabled"
-    app.update_idletasks()
+        if current_page > 0:
+            prev_button["state"] = "normal"
+        else:
+            prev_button["state"] = "disabled"
+        if current_page < len(pages) - 1:
+            next_button["state"] = "normal"
+        else:
+            next_button["state"] = "disabled"
+        app.update_idletasks()
 
 
 def get_tracks_from_playlist(playlist_url, from_profile, index):

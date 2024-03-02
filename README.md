@@ -5,18 +5,18 @@ SpotiQueue is a Python application that allows Spotify users to queue multiple p
 ## Features
 
 - Extract playlists from a user's Spotify profile
-- Add playlists to the queue
 - Extract playlists from a provided Spotify URL
+- Add playlists to the queue
 
 ## Installation
 
 1. Go to release section of this repository. Current is:
 2. Click on **SpotiQueue.exe**. Download will start automatically
-3. You don't need any additional files, so you can start using it instantly after downloading is complete
+3. No additional files are needed, so you can start using it instantly after the download is complete.
 
-## Usage 
+## Usage
 
-1. Run the `main.py` script or **SpotiQueue.exe** (if you installed release) to start the application.
+1. Run the `SpotiQueue.exe` to start the application.
 2. Follow the prompts in the application to select the source of the playlists (from profile or from URL).
 3. If you select "From Profile", the application will display your playlists and you can select which ones to add to the queue.
 4. If you select "From URL", you will need to provide the URL of the Spotify playlist you want to add to the queue.
