@@ -244,8 +244,8 @@ def create_end_label():
 
 
 #Dane autoryzacyjne
-client_id = '1699b459bebc44529fa82968a283d4be'
-client_secret = 'e63f46aa84e24d9f8e7f820adf52df70'
+client_id = 'xyz' #insert your client id here
+client_secret = 'xyz'  #insert your client secret here
 redirect_uri = 'http://localhost:3000/'
 scope = 'playlist-read-private user-modify-playback-state'
 
