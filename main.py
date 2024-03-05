@@ -7,12 +7,16 @@ from PIL import Image
 from io import BytesIO
 import time
 import threading
+import os
+import configparser
+
 
 playlist_count = None
 current_url = None
 playlist_frame = None
 selected_playlist = None
 is_from_profile = []
+
 
 def prepere_display(select_frame):
     global playlist_frame
@@ -63,9 +67,7 @@ def disp_playlists(select_frame):
     select_frame.destroy()
     playlist_frame.pack()
 
-
     if 'prev_button' not in globals():
-
         prev_button = tk.CTkButton(app, text="<", command=prev_page)
         prev_button.pack(side="left")
     if 'next_button' not in globals():
@@ -243,23 +245,75 @@ def create_end_label():
     app.after(5000, app.quit)
 
 
+def get_user_input_config():
+    input_frame = tk.CTkFrame(app)
+    input_frame.pack(fill=tk.BOTH, expand=True)
+
+    client_id_label = tk.CTkLabel(input_frame, text="Enter your client_id:", font=("Roboto", 16, "bold"), text_color="white")
+    client_id_label.pack(pady=(40, 0))
+    client_id_entry = tk.CTkEntry(input_frame)
+    client_id_entry.pack(pady=5)
+
+    client_secret_label = tk.CTkLabel(input_frame, text="Enter your client_secret:", font=("Roboto", 16, "bold"), text_color="white")
+    client_secret_label.pack(pady=(30, 0))
+    client_secret_entry = tk.CTkEntry(input_frame)
+    client_secret_entry.pack(pady=5)
+
+    redirect_uri_label = tk.CTkLabel(input_frame, text="Enter your redirect_uri:", font=("Roboto", 16, "bold"), text_color="white")
+    redirect_uri_label.pack(pady=(30, 0))
+    redirect_uri_entry = tk.CTkEntry(input_frame)
+    redirect_uri_entry.pack(pady=5)
+
+    submit_button = tk.CTkButton(input_frame, text="Submit", font=("Roboto", 10), text_color="white", command=lambda: process_user_input_config(client_id_entry.get(), client_secret_entry.get(), redirect_uri_entry.get(), input_frame))
+    submit_button.place(relx=0.5, rely=0.9, anchor='s')
+    app.mainloop()
+
+
+def process_user_input_config(client_id, client_secret, redirect_uri, input_frame):
+    config['SPOTIFY'] = {'client_id': client_id, 'client_secret': client_secret, 'redirect_uri': redirect_uri}
+
+    with open(config_file, 'w') as configfile:
+        config.write(configfile)
+
+    input_frame.destroy()
+    app.quit()
+
+
+def end_all():
+    app.quit()
+    quit()
+
+
+app = tk.CTk()
+app.title("SpotiQueue")
+app.geometry("420x600")
+app.protocol("WM_DELETE_WINDOW", end_all)
+
 #Dane autoryzacyjne
-client_id = 'xyz' #insert your client id here
-client_secret = 'xyz'  #insert your client secret here
-redirect_uri = 'http://localhost:3000/'
-scope = 'playlist-read-private user-modify-playback-state'
+config_file = 'config.sg'
+config = configparser.ConfigParser()
+
+if not os.path.exists(config_file):
+    get_user_input_config()
+    config.read(config_file)
+    client_id = config.get('SPOTIFY', 'client_id')
+    client_secret = config.get('SPOTIFY', 'client_secret')
+    redirect_uri = config.get('SPOTIFY', 'redirect_uri')
+else:
+    config.read(config_file)
+    client_id = config.get('SPOTIFY', 'client_id')
+    client_secret = config.get('SPOTIFY', 'client_secret')
+    redirect_uri = config.get('SPOTIFY', 'redirect_uri')
+
 
 # Autoryzacja
+scope = 'playlist-read-private user-modify-playback-state'
 auth_manager = SpotifyOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri, scope=scope)
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 playlists = sp.current_user_playlists()['items']
 playlists_per_page = 15
 pages = [playlists[i:i + playlists_per_page] for i in range(0, len(playlists), playlists_per_page)]
-
-app = tk.CTk()
-app.title("SpotiQueue")
-app.geometry("420x600")
 
 input_frame = tk.CTkFrame(app)
 input_frame.pack(fill=tk.BOTH, expand=True)
