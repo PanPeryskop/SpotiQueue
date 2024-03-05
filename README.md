@@ -18,7 +18,7 @@ Before you can use SpotiQueue, you need to create a Spotify Developer applicatio
 4. Fill in the 'Name', 'Description' and redirect_uri (I recommend using http://localhost:3000/) for your new app, then click 'Create'.
 5. On the next page, you will see your `client_id` and `client_secret`. You will need these to authenticate your application.
 6. Click on 'Edit Settings'.
-7. In the 'Redirect URIs' field, enter the URI where you want Spotify to redirect you after a successful login. This must be a valid URI. For local applications, you can use `http://localhost:8000/callback/`.
+7. In the 'Redirect URIs' field, enter the URI where you want Spotify to redirect you after a successful login.
 8. Click 'Save'.
 
 ## Installation
