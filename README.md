@@ -23,7 +23,7 @@ Before you can use SpotiQueue, you need to create a Spotify Developer applicatio
 
 ## Installation
 
-1. Go to the release section of this repository. [Current release.](https://github.com/PanPeryskop/SpotiQueue/releases/tag/v1.0)
+1. Go to the release section of this repository. [Current release.](https://github.com/PanPeryskop/SpotiQueue/releases/tag/v1.1)
 2. Click on **SpotiQueue.zip**. Download will start automatically.
 3. Extract the zip file.
 4. Open the extracted folder and run `SpotiQueue.exe`.
