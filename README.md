@@ -8,7 +8,7 @@ SpotiQueue is a Python application that allows Spotify users to queue multiple p
 - Extract playlists from a provided Spotify URL
 - Add playlists to the queue
 
-## Prerequisites
+## Before you install
 
 Before you can use SpotiQueue, you need to create a Spotify Developer application to get your `client_id`, `client_secret`, and `redirect_uri`. Here's how you can do it:
 
